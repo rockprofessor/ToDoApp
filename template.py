@@ -28,7 +28,7 @@ class ToDoApp(QWidget):
         self.layout.addWidget(self.category_select)
 
         self.priority_select = QComboBox(self)
-        self.priority_select.addItems(["Hoch", "Mittel", "Niedrig"])
+        self.priority_select.addItems(["Schularbeit", "Test", "Wiederholung"])
         self.layout.addWidget(self.priority_select)
 
         self.add_button = QPushButton("Add Task")
@@ -83,4 +83,3 @@ if __name__ == "__main__":
     window = ToDoApp()
     window.show()
     sys.exit(app.exec())
-
