@@ -1,4 +1,4 @@
-#JOhni12 was here
+#JOhni12 was here too pls dont pull request for me
 #Hello
 # Emil was here :D
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QListWidget, QLineEdit, QMessageBox
