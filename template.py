@@ -1,4 +1,4 @@
-#JOhni12 was here too
+#JOhni12 was here
 #Hello
 # Emil was here :D
 from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QListWidget, QLineEdit, QMessageBox
