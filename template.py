@@ -1,4 +1,4 @@
-#JOhni12 was here too, i try to 
+#JOhni12 was here too, geht das? 
 #Hello
 # Emil was here :D
 #Simon wasn't here :(
