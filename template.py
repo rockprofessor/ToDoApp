@@ -27,6 +27,10 @@ class ToDoApp(QWidget):
         self.remove_button = QPushButton("Remove Task")
         self.remove_button.clicked.connect(self.remove_task)
         self.layout.addWidget(self.remove_button)
+        
+        self.pro_abo_button = QPushButton("Pro Abo")
+        self.pro_abo_button.clicked.connect(self.pro_abo)
+        self.layout.addWidget(self.pro_abo_button)
 
         self.setLayout(self.layout)
 
@@ -44,6 +48,9 @@ class ToDoApp(QWidget):
             self.task_list.takeItem(selected)
         else:
             QMessageBox.warning(self, "Warning", "Select a task to remove!")
+    
+    def pro_abo(self):
+        QMessageBox.information(self, "Pro Abo", "Upgrade to Pro for more features!")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
