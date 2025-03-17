@@ -1,4 +1,6 @@
-from textual.app import App, ComposeResult from textual.widgets import Header, Footer, Input, Static, Button, ListView, ListItem from textual.containers import Vertical
+from textual.app import App, ComposeResult
+from textual.widgets import Header, Footer, Input, Static, Button, ListView, ListItem
+from textual.containers import Vertical
 from datetime import datetime
 
 class Task:
