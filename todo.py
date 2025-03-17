@@ -1,5 +1,34 @@
-from textual.app import App, ComposeResult from textual.widgets import Header, Footer, Input, Static, Button, ListView, ListItem from textual.containers import Vertical
+from textual.app import App, ComposeResult 
+from textual.widgets import Header, Footer, Input, Static, Button, ListView, ListItem 
+from textual.containers import Vertical
 from datetime import datetime
+import argparse
+
+#Argument parser for parsing arguments
+parser = argparse.ArgumentParser(
+	description = "Import existing taskfile or -p to only print all tasks"
+)
+
+# Group for adding tasks: -ti (adds a tasks), -tf (add tasks from a file)
+task_group = parser.add_mutually_exclusive_group(required=False)
+task_group.add_argument(
+    "-ti", "--task-input",
+    help="adds task directly with this argument, Format: 'title, due_date'"
+)
+
+task_group.add_argument(
+    "-tf", "--task-file",
+    help="adds tasks from a file, each line should contain 'title, due_date'"
+)
+
+task_group.add_argument(
+    "-p", "--print",
+    help="prints all tasks",
+    action = "store_true"
+)
+
+
+
 
 class Task:
     def __init__(self, title: str, due_date: str):
@@ -45,6 +74,38 @@ class TodoApp(App):
                 self.query_one("#date_input", Input).value = ""
 
 if __name__ == "__main__":
-    app = TodoApp()
-    app.run()
+    args = parser.parse_args()
+    
+    if args.task_input:
+        parts = [part.strip() for part in args.task_input.split(',', 1)]
+        try:
+            task = Task(parts[0], parts[1])
+            print(task)
+        except ValueError:
+            print("Invalid date format. Please use YYYY-MM-DD.")
 
+    elif args.task_file:
+        with open(args.task_file, 'r') as file:
+            for line in file:
+                parts = [part.strip() for part in line.strip().split(',', 1)]
+                try:
+                    task = Task(parts[0], parts[1])
+                    print(task)
+                except ValueError:
+                    print(f"Invalid date format for task '{parts[0]}'. Please use YYYY-MM-DD.")
+
+    elif args.print:
+        # Assuming tasks are stored in a file named 'tasks.txt'
+        with open('tasks.txt', 'r') as file:
+            for line in file:
+                parts = [part.strip() for part in line.strip().split(',', 1)]
+                try:
+                    task = Task(parts[0], parts[1])
+                    print(task)
+                except ValueError:
+                    print(f"Invalid date format for task '{parts[0]}'. Please use YYYY-MM-DD.")
+                except FileNotFoundError:
+                    print("No tasks found. Please add tasks using -ti or -tf or using the interface.")
+    else:
+        app = TodoApp()
+        app.run()
