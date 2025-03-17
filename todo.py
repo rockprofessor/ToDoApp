@@ -95,17 +95,19 @@ if __name__ == "__main__":
                     print(f"Invalid date format for task '{parts[0]}'. Please use YYYY-MM-DD.")
 
     elif args.print:
-        # Assuming tasks are stored in a file named 'tasks.txt'
-        with open('tasks.txt', 'r') as file:
-            for line in file:
-                parts = [part.strip() for part in line.strip().split(',', 1)]
-                try:
-                    task = Task(parts[0], parts[1])
-                    print(task)
-                except ValueError:
-                    print(f"Invalid date format for task '{parts[0]}'. Please use YYYY-MM-DD.")
-                except FileNotFoundError:
-                    print("No tasks found. Please add tasks using -ti or -tf or using the interface.")
+        try:
+            # Assuming tasks are stored in a file named 'tasks.txt'
+            with open('tasks.txt', 'r') as file:
+                for line in file:
+                    parts = [part.strip() for part in line.strip().split(',', 1)]
+                    try:
+                        task = Task(parts[0], parts[1])
+                        print(task)
+                    except ValueError:
+                        print(f"Invalid date format for task '{parts[0]}'. Please use YYYY-MM-DD.")
+        except FileNotFoundError:
+            print("No tasks found. Please add tasks using -ti or -tf or using the interface.")
+
     else:
         app = TodoApp()
         app.run()
